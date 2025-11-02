@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_aa43e4a3a3c4a40773791b1938397884 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <script>
+    // Store city data
+    const cityData = {"New York": "new_york.html", "Los Angeles": "los_angeles.html", "Chicago": "chicago.html", "Atlanta": "atlanta.html", "Miami": "miami.html", "Dallas": "dallas.html", "Denver": "denver.html", "Seattle": "seattle.html", "Boston": "boston.html", "San Francisco Bay Area": "san_francisco.html", "Phoenix": "phoenix.html", "Las Vegas": "las_vegas.html", "Minneapolis": "minneapolis.html", "Charlotte": "charlotte.html", "Washington DC": "washington_dc.html", "Philadelphia": "philadelphia.html", "Detroit": "detroit.html", "Orlando": "orlando.html", "San Diego": "san_diego.html"};
+    // Function to add click handlers
+    function addCircleClickHandlers() {
+        const paths = document.querySelectorAll('path');
+        let circleIndex = 0;
+        
+        paths.forEach(function(path) {
+  
+            // Check if this is one of our blue circles
+            if (path.getAttribute('fill') === '#3186cc') { //TODO: Change color????
+                path.style.cursor = 'pointer';
+                
+                // Get city name from our predefined order 
+                // TODO: might want to change this to make going back easier / deselecting.
+                const cityNames = Object.keys(cityData);
+                if (circleIndex < cityNames.length) {
+                    const cityName = cityNames[circleIndex];
+                    const page = cityData[cityName];
+                    
+                    path.addEventListener('click', function(e) {
+                        console.log('Navigating to:', page);
+                        window.location.href = page;
+                        e.stopPropagation();
+                    });
+                    
+                    circleIndex++;
+                }
+            }
+        });
+        
+        // If we didn't find all circles, try again
+        if (circleIndex < Object.keys(cityData).length) {
+            setTimeout(addCircleClickHandlers, 500);
+        }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(addCircleClickHandlers, 1000);
+    });
+    </script>
+    
+    
+            <div class="folium-map" id="map_aa43e4a3a3c4a40773791b1938397884" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_aa43e4a3a3c4a40773791b1938397884 = L.map(
+                "map_aa43e4a3a3c4a40773791b1938397884",
+                {
+                    center: [41.9, -97.3],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "worldCopyJump": true,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5e22b900e524543ac227c2569b75a5f4 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5e22b900e524543ac227c2569b75a5f4.addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            var circle_32c6b3e03b81cba84d2c5254b59af5c2 = L.circle(
+                [40.7128, -74.006],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_32c6b3e03b81cba84d2c5254b59af5c2.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: New York
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_6d28791013d2f645e8d0ff9827ef162d = L.circle(
+                [34.0522, -118.2437],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_6d28791013d2f645e8d0ff9827ef162d.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Los Angeles
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_2da0bddbb17592403e47e80a948c10d6 = L.circle(
+                [41.8781, -87.6298],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_2da0bddbb17592403e47e80a948c10d6.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Chicago
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_3c19482f383bb20741cb0f4a8fca4101 = L.circle(
+                [33.749, -84.388],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_3c19482f383bb20741cb0f4a8fca4101.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Atlanta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_c141dc4ecf27dd5c1c7641e4e6474905 = L.circle(
+                [25.7617, -80.1918],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_c141dc4ecf27dd5c1c7641e4e6474905.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Miami
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_6b48397f6e1e2917f5bb7f6da47786e3 = L.circle(
+                [32.7767, -96.797],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_6b48397f6e1e2917f5bb7f6da47786e3.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Dallas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_190163d0804189330f96dcb4619caaee = L.circle(
+                [39.7392, -104.9903],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_190163d0804189330f96dcb4619caaee.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Denver
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_50ff50ce82487926faa34fc888282968 = L.circle(
+                [47.6062, -122.3321],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_50ff50ce82487926faa34fc888282968.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Seattle
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_5746fb9aab6bcbc4d89c1f0fdd3a8715 = L.circle(
+                [42.3601, -71.0589],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_5746fb9aab6bcbc4d89c1f0fdd3a8715.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Boston
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_49168ab072ded1e876ab65b46cfc19a5 = L.circle(
+                [37.7749, -122.4194],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_49168ab072ded1e876ab65b46cfc19a5.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: San Francisco Bay Area
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_7526827f5d74391d588680c7eb36b9e5 = L.circle(
+                [33.4484, -112.074],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_7526827f5d74391d588680c7eb36b9e5.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Phoenix
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_60f82583228eef6ec068d528f5caa345 = L.circle(
+                [36.1699, -115.1398],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_60f82583228eef6ec068d528f5caa345.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Las Vegas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_78ec0d1e85325b031193b81e886e7ed9 = L.circle(
+                [44.9778, -93.265],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_78ec0d1e85325b031193b81e886e7ed9.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Minneapolis
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_4a9b4fd16803413b24dba4f1898f0bdf = L.circle(
+                [35.2271, -80.8431],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_4a9b4fd16803413b24dba4f1898f0bdf.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Charlotte
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_f57d6bfc2c99ca4844971d11b45345d7 = L.circle(
+                [38.9072, -77.0369],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_f57d6bfc2c99ca4844971d11b45345d7.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Washington DC
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_a8c04a7d89f7b37f54fa09634afd18b2 = L.circle(
+                [39.9526, -75.1652],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_a8c04a7d89f7b37f54fa09634afd18b2.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Philadelphia
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_bb15c43bc53be888766928c3e55599de = L.circle(
+                [42.3314, -83.0458],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_bb15c43bc53be888766928c3e55599de.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Detroit
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_467123c45ab78e673872cf22f5edf116 = L.circle(
+                [28.5383, -81.3792],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_467123c45ab78e673872cf22f5edf116.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: Orlando
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_7f38303ba00703622488ba51f5c913ec = L.circle(
+                [32.7157, -117.1611],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 32186.8, "stroke": false, "weight": 3}
+            ).addTo(map_aa43e4a3a3c4a40773791b1938397884);
+        
+    
+            circle_7f38303ba00703622488ba51f5c913ec.bindTooltip(
+                `<div style="width:520; \n             height:30px; \n             padding: 2.5px,7.5px;\n             font-size: 25px;    \n             ">
+                     Flight Routes from: San Diego
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
