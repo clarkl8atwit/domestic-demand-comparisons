@@ -26,7 +26,7 @@ This project visualizes **domestic flight demand** across major U.S. cities.
 
 ![Example of Domestic Flight Visualization](images/example.png)
 
----
+
 ### Project Info
 Created for **COMP3125 Group Project**  
 **Wentworth Institute of Technology**
